@@ -1,0 +1,40 @@
+
+=== Men's/Open Premier Division, league matches 2019/20 to 2026/27: 627 games ===
+1. Home goal difference per game: +0.07  (95% interval -0.20 to +0.35)
+   Home win 45%, draw 13%, away win 43%. Home side won 51% of decisive games (95% 47% to 55%; no edge = 50%)
+   Points per game: home 1.47, away 1.40
+2. Paired (same two teams, both venues, same season): 169 pairs
+   Venue worth +0.03 goals a game  (95% interval -0.17 to +0.24); permutation p = 0.7696
+3. By season (raw home goal difference per game, and paired edge):
+   2019/20   90 games  +0.10  (-0.63 to +0.81)   paired +0.10 (45 pairs)
+   2020/21   26 games  +0.81  (-0.38 to +2.04)   no pairs   COVID season, cut short
+   2021/22  104 games  +0.11  (-0.57 to +0.79)   paired -0.06 (24 pairs)
+   2022/23   96 games  +0.54  (-0.05 to +1.12)   paired +0.41 (27 pairs)
+   2023/24   96 games  -0.11  (-0.92 to +0.69)   paired -0.15 (26 pairs)
+   2024/25   96 games  -0.19  (-0.89 to +0.51)   paired -0.12 (25 pairs)
+   2025/26   96 games  -0.15  (-0.88 to +0.55)   paired -0.07 (22 pairs)
+   2026/27   23 games  -0.13  (-1.30 to +1.09)   no pairs
+
+=== Women's Premier Division, league matches 2019/20 to 2026/27: 630 games ===
+1. Home goal difference per game: +0.14  (95% interval -0.06 to +0.35)
+   Home win 42%, draw 17%, away win 41%. Home side won 51% of decisive games (95% 47% to 55%; no edge = 50%)
+   Points per game: home 1.44, away 1.39
+2. Paired (same two teams, both venues, same season): 171 pairs
+   Venue worth -0.01 goals a game  (95% interval -0.21 to +0.18); permutation p = 0.9081
+3. By season (raw home goal difference per game, and paired edge):
+   2019/20   90 games  +0.13  (-0.29 to +0.57)   paired +0.13 (45 pairs)
+   2020/21   27 games  -0.04  (-0.89 to +0.81)   no pairs   COVID season, cut short
+   2021/22  105 games  +0.22  (-0.25 to +0.70)   paired +0.17 (25 pairs)
+   2022/23   96 games  +0.32  (-0.20 to +0.84)   paired -0.16 (25 pairs)
+   2023/24   96 games  -0.07  (-0.54 to +0.40)   paired -0.27 (24 pairs)
+   2024/25   96 games  -0.29  (-0.82 to +0.23)   paired -0.22 (27 pairs)
+   2025/26   96 games  +0.44  (-0.09 to +0.98)   paired +0.16 (25 pairs)
+   2026/27   24 games  +0.71  (-0.83 to +2.25)   no pairs
+
+=== For comparison: the divisions below, league games, home goal difference per game ===
+   Men Conference   1540 games  +0.44  (+0.31 to +0.57)   home won 57% of decisive games
+   Men Division 1    770 games  +0.39  (+0.22 to +0.57)   home won 56% of decisive games
+   Women Conference   1540 games  +0.18  (+0.06 to +0.29)   home won 56% of decisive games
+   Women Division 1    770 games  +0.29  (+0.13 to +0.45)   home won 55% of decisive games
+
+Intervals: 10,000 bootstrap resamples of games (or pairs). Excludes Finals Weekend, League Finals pools and play-offs (hosted or neutral venues).

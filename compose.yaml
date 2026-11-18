@@ -1,0 +1,68 @@
+services:
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "${MYSQL_HOST_PORT:-3307}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin ping -h localhost -p$$MYSQL_ROOT_PASSWORD --silent",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  ingest:
+    build:
+      context: ./data/ingest
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      EH_API_BASE_URL: ${EH_API_BASE_URL:-https://ehdwapi.englandhockey.co.uk/api}
+      EH_API_KEY: ${EH_API_KEY:-}
+      EH_SEASON_ID: ${EH_SEASON_ID:-}
+      EH_LIVE_SEASON_ID: ${EH_LIVE_SEASON_ID:-}
+      EH_COMPETITION_ID: ${EH_COMPETITION_ID:-}
+      EH_PAGE_SIZE: ${EH_PAGE_SIZE:-100}
+      EH_FETCH_FIXTURE_DETAILS: ${EH_FETCH_FIXTURE_DETAILS:-true}
+      EH_REQUEST_TIMEOUT_SECONDS: ${EH_REQUEST_TIMEOUT_SECONDS:-30}
+    volumes:
+      - ./data/raw:/app/data:ro   # hand-transcribed inputs (e.g. data/raw/flashscore/raw) for import-flashscore
+      - ./data/cache:/app/cache   # scraped pages of finished matches (import-bundesliga), so re-runs don't refetch
+    command: ["ingest", "--help"]
+
+  adminer:
+    image: adminer:4
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+
+  jupyter:
+    build:
+      context: ./analysis
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+    volumes:
+      - ./analysis:/home/jovyan/work
+      - ./data:/data   # exports land in data/exports, not next to the code
+    ports:
+      - "127.0.0.1:8888:8888"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  mysql_data:

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FHA Website Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Big+Shoulders+Display:wght@700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: one long technical map, read top to bottom: the big picture, then each place, then who gets in, then the weekly scripts. */
+:root {
+  --ground: #F6F5F0;      /* paper */
+  --ink: #1C2B3B;         /* navy */
+  --muted: #5B6672;
+  --line: #C9CCC4;
+  --card: #FFFFFF;
+  --accent: #4E7F3F;      /* sage, darkened for text on paper */
+  --accent-soft: #E3EDDD;
+  --warn: #9A6A00;
+  --no: #A33A2E;
+  --display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+  --body: "Arimo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #14202C; --ink: #EEF0EA; --muted: #9AA6B2; --line: #33465A; --card: #1C2B3B;
+    --accent: #8BC077; --accent-soft: #24392C; --warn: #E3B341; --no: #F08A7E; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #14202C; --ink: #EEF0EA; --muted: #9AA6B2; --line: #33465A; --card: #1C2B3B;
+  --accent: #8BC077; --accent-soft: #24392C; --warn: #E3B341; --no: #F08A7E; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 16px/1.55 var(--body); }
+main { max-width: 1060px; margin: 0 auto; padding: 40px 20px 80px; display: grid; gap: 56px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 900; line-height: 1.05; text-wrap: balance; margin: 0; letter-spacing: .01em; }
+h1 { font-size: clamp(40px, 7vw, 64px); text-transform: uppercase; }
+h2 { font-size: 34px; text-transform: uppercase; }
+h3 { font-size: 22px; font-weight: 700; }
+p { margin: 0; max-width: 68ch; }
+section { display: grid; gap: 18px; }
+.lede { font-size: 18px; color: var(--muted); }
+.eyebrow { font: 700 12px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+code, .mono { font-family: var(--mono); font-size: .86em; }
+.legend { display: flex; flex-wrap: wrap; gap: 18px; font-size: 14px; color: var(--muted); align-items: center; }
+.legend svg { vertical-align: middle; margin-right: 6px; }
+.pill { display: inline-block; font: 700 11px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; padding: 5px 8px; border-radius: 99px; white-space: nowrap; }
+.built { background: var(--accent-soft); color: var(--accent); }
+.planned { border: 1.5px dashed var(--muted); color: var(--muted); padding: 4px 7px; }
+figure { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+figure svg { display: block; width: 100%; min-width: 760px; height: auto; color: var(--ink); }
+figcaption { margin-top: 12px; font-size: 14px; color: var(--muted); max-width: 80ch; }
+/* svg classes */
+.box { fill: var(--card); stroke: var(--line); stroke-width: 1.5; }
+.zone { fill: var(--ground); stroke: var(--line); stroke-width: 1.5; }
+.zone-ref { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
+.dash { stroke-dasharray: 6 5; }
+.edge { stroke: currentColor; stroke-width: 1.6; fill: none; }
+.edge-acc { stroke: var(--accent); stroke-width: 2; fill: none; }
+.t { font: 700 14px var(--body); fill: var(--ink); }
+.tz { font: 900 17px var(--display); fill: var(--ink); letter-spacing: .03em; text-transform: uppercase; }
+.s { font: 400 11.5px var(--body); fill: var(--muted); }
+.m { font: 600 12.5px var(--mono); fill: var(--ink); }
+.lab { font: 700 11px var(--body); fill: var(--accent); }
+.labm { font: 700 11px var(--body); fill: var(--muted); }
+/* tables */
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { font: 700 12px var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--ground); }
+tbody tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+tr.group td { background: var(--ground); font: 900 15px var(--display); letter-spacing: .06em; text-transform: uppercase; }
+.yes { color: var(--accent); font-weight: 700; }
+.no { color: var(--no); font-weight: 700; }
+.part { color: var(--warn); font-weight: 700; }
+/* script cards */
+.steps { display: grid; gap: 14px; }
+.step { display: grid; grid-template-columns: 150px 1fr; gap: 18px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+.step.is-planned { border-style: dashed; }
+.when { font: 900 20px/1.1 var(--display); text-transform: uppercase; }
+.when small { display: block; font: 400 13px var(--body); color: var(--muted); text-transform: none; margin-top: 4px; }
+.step h3 { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-family: var(--mono); font-size: 16px; font-weight: 600; }
+.step p { font-size: 15px; margin-top: 6px; }
+.writes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.chip { font: 600 12px var(--mono); padding: 5px 9px; border-radius: 6px; background: var(--ground); border: 1px solid var(--line); }
+.chip b { font-family: var(--body); color: var(--accent); margin-right: 4px; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; }
+.card p { font-size: 15px; }
+pre { margin: 0; font: 12.5px/1.5 var(--mono); background: var(--ground); border: 1px solid var(--line); border-radius: 8px; padding: 12px; overflow-x: auto; }
+@media (max-width: 640px) { .step { grid-template-columns: 1fr; gap: 8px; } }
+</style>
+</head>
+<body>
+<main>
+
+<header style="display:grid;gap:14px">
+  <span class="eyebrow">FHA Weekly Predictor · state at 18 Nov 2026</span>
+  <h1>The website, mapped</h1>
+  <p class="lede">Where every piece of data lives, who can see or change it, and which script puts it there. Everything starts in your Mac's <code>hockey_stats</code> and flows one way out.</p>
+  <div class="legend">
+    <span><svg width="34" height="10" aria-hidden="true"><line x1="0" y1="5" x2="34" y2="5" stroke="currentColor" stroke-width="2"/></svg>built and running</span>
+    <span><svg width="34" height="10" aria-hidden="true"><line x1="0" y1="5" x2="34" y2="5" stroke="currentColor" stroke-width="2" stroke-dasharray="6 5"/></svg>planned, not built</span>
+    <span><span class="pill built">Built</span> <span class="pill planned">Planned</span></span>
+  </div>
+</header>
+
+<!-- 1. BIG PICTURE -->
+<section>
+  <span class="eyebrow">1 · The big picture</span>
+  <h2>Four places, one direction</h2>
+  <figure>
+    <svg viewBox="0 0 980 520" role="img" aria-label="Data flows from England Hockey into MySQL on your Mac. Scripts on the Mac push static JSON through GitHub to the Cloudflare website, and push rounds and results into Supabase with the secret key. Visitors' browsers load pages from Cloudflare and save picks to Supabase with the publishable key.">
+      <defs>
+        <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+      </defs>
+      <!-- England Hockey -->
+      <rect class="box" x="20" y="16" width="250" height="42" rx="8"/>
+      <text class="t" x="145" y="42" text-anchor="middle">England Hockey API</text>
+      <line class="edge" x1="145" y1="58" x2="145" y2="90" marker-end="url(#a1)"/>
+      <text class="labm" x="156" y="79">ingest, every week</text>
+
+      <!-- Mac -->
+      <rect class="zone" x="20" y="92" width="250" height="410" rx="12"/>
+      <text class="tz" x="36" y="118">Your Mac</text>
+      <rect class="box" x="40" y="132" width="210" height="62" rx="8"/>
+      <text class="m" x="145" y="157" text-anchor="middle">hockey_stats</text>
+      <text class="s" x="145" y="176" text-anchor="middle">MySQL · the master copy · 61 MB</text>
+      <rect class="box" x="40" y="210" width="210" height="44" rx="8"/>
+      <text class="m" x="145" y="237" text-anchor="middle">weekly.sh call | verdict</text>
+      <rect class="box" x="40" y="270" width="210" height="38" rx="8"/>
+      <text class="m" x="145" y="294" text-anchor="middle">round_json.py</text>
+      <rect class="box" x="40" y="322" width="210" height="38" rx="8"/>
+      <text class="m" x="145" y="346" text-anchor="middle">publish_round.py</text>
+      <rect class="box dash" x="40" y="374" width="210" height="38" rx="8"/>
+      <text class="m" x="145" y="398" text-anchor="middle">publish_results.py</text>
+      <rect class="box" x="40" y="430" width="210" height="54" rx="8"/>
+      <text class="m" x="145" y="453" text-anchor="middle">.env</text>
+      <text class="s" x="145" y="472" text-anchor="middle">secret key · DB password · never in git</text>
+
+      <!-- GitHub -->
+      <rect class="box" x="360" y="92" width="280" height="54" rx="8"/>
+      <text class="t" x="500" y="116" text-anchor="middle">GitHub repo</text>
+      <text class="s" x="500" y="134" text-anchor="middle">private · code, docs, the JSON files</text>
+      <line class="edge" x1="250" y1="289" x2="310" y2="289"/>
+      <polyline class="edge" points="310,289 310,119 358,119" marker-end="url(#a1)"/>
+      <text class="labm" x="316" y="110">git push</text>
+
+      <!-- Cloudflare -->
+      <rect class="zone" x="360" y="178" width="280" height="118" rx="12"/>
+      <text class="tz" x="376" y="203">Website · Cloudflare</text>
+      <text class="s" x="376" y="224">thefieldhockeyanalyst.com</text>
+      <text class="m" x="376" y="250">index.html · logo.png</text>
+      <text class="m" x="376" y="274">data/predictor/round-10.json</text>
+      <line class="edge" x1="500" y1="146" x2="500" y2="176" marker-end="url(#a1)"/>
+      <text class="labm" x="510" y="166">rebuilds on push</text>
+
+      <!-- Supabase -->
+      <rect class="zone" x="360" y="320" width="280" height="182" rx="12"/>
+      <text class="tz" x="376" y="345">Supabase · project fha</text>
+      <text class="m" x="376" y="372">auth</text><text class="s" x="460" y="372">sign-ins (Supabase's own)</text>
+      <text class="m" x="376" y="396">public</text><text class="s" x="460" y="396">profiles, roles</text>
+      <text class="m" x="376" y="420">ref</text><text class="s" x="460" y="420">clubs, teams, matches</text>
+      <text class="m" x="376" y="444">predictor</text><text class="s" x="460" y="444">rounds, picks, leaderboards</text>
+      <text class="lab" x="376" y="480">+ the rules: grants, RLS, constraints</text>
+      <line class="edge" x1="250" y1="341" x2="358" y2="341" marker-end="url(#a1)"/>
+      <text class="lab" x="304" y="333" text-anchor="middle">secret key</text>
+      <line class="edge dash" x1="250" y1="393" x2="358" y2="393" marker-end="url(#a1)"/>
+      <text class="labm" x="304" y="385" text-anchor="middle">scores</text>
+
+      <!-- Visitor -->
+      <rect class="box" x="740" y="236" width="220" height="150" rx="10"/>
+      <text class="tz" x="850" y="266" text-anchor="middle">Visitor's browser</text>
+      <text class="s" x="850" y="290" text-anchor="middle">phone or laptop</text>
+      <text class="s" x="850" y="312" text-anchor="middle">carries the publishable key</text>
+      <text class="s" x="850" y="332" text-anchor="middle">+ their own sign-in token</text>
+      <text class="labm" x="850" y="364" text-anchor="middle">no game pages yet</text>
+      <line class="edge" x1="738" y1="262" x2="642" y2="262" marker-end="url(#a1)"/>
+      <text class="labm" x="690" y="254" text-anchor="middle">pages + JSON</text>
+      <line class="edge dash" x1="738" y1="362" x2="642" y2="362" marker-start="url(#a1)" marker-end="url(#a1)"/>
+      <text class="lab" x="690" y="354" text-anchor="middle">picks, boards</text>
+    </svg>
+    <figcaption>Your Mac is the only place that writes the hockey data. It reaches the website two ways: files through GitHub, and rows straight into Supabase with the secret key. Visitors read pages from Cloudflare and talk to Supabase directly. Nothing ever writes back to <code>hockey_stats</code>.</figcaption>
+  </figure>
+</section>
+
+<!-- 2. SUPABASE TABLES -->
+<section>
+  <span class="eyebrow">2 · Inside Supabase</span>
+  <h2>Ten tables, four schemas</h2>
+  <p>One database, <code>fha</code>. Schemas are its labelled cabinets. Arrows point from a table to the one it references. The game points at the shared facts in <code>ref</code> and the people in <code>public</code>; they never point back.</p>
+  <figure>
+    <svg viewBox="0 0 980 540" role="img" aria-label="Table relationships. ref holds clubs, teams and matches. predictor holds editions, rounds, round_matches, picks and players; round_matches points to ref.matches, picks point to round_matches and players, players point to public.profiles. profiles point to auth.users and optionally to a favourite ref team.">
+      <defs>
+        <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+      </defs>
+      <!-- schema bands -->
+      <rect class="zone-ref" x="20" y="14" width="220" height="330" rx="12"/>
+      <text class="tz" x="36" y="40">ref</text><text class="s" x="76" y="40">shared hockey facts</text>
+      <rect class="zone" x="290" y="14" width="260" height="470" rx="12"/>
+      <text class="tz" x="306" y="40">predictor</text><text class="s" x="396" y="40">the game</text>
+      <rect class="zone" x="600" y="14" width="200" height="470" rx="12"/>
+      <text class="tz" x="616" y="40">public</text><text class="s" x="680" y="40">people</text>
+      <rect class="zone" x="830" y="14" width="135" height="470" rx="12"/>
+      <text class="tz" x="846" y="40">auth</text><text class="s" x="846" y="58">Supabase's</text>
+
+      <!-- ref -->
+      <rect class="box" x="38" y="62" width="184" height="60" rx="8"/>
+      <text class="m" x="50" y="86">clubs</text><text class="s" x="210" y="86" text-anchor="end">18 rows</text>
+      <text class="s" x="50" y="106">name, badge, colours</text>
+      <rect class="box" x="38" y="152" width="184" height="60" rx="8"/>
+      <text class="m" x="50" y="176">teams</text><text class="s" x="210" y="176" text-anchor="end">24 rows</text>
+      <text class="s" x="50" y="196">club, M or W, display name</text>
+      <rect class="box" x="38" y="242" width="184" height="78" rx="8"/>
+      <text class="m" x="50" y="266">matches</text><text class="s" x="210" y="266" text-anchor="end">6 rows</text>
+      <text class="s" x="50" y="286">home, away, kick-off (UTC)</text>
+      <text class="s" x="50" y="304">score, status S / R / P / A</text>
+      <line class="edge" x1="130" y1="152" x2="130" y2="124" marker-end="url(#a2)"/>
+      <line class="edge" x1="130" y1="242" x2="130" y2="214" marker-end="url(#a2)"/>
+
+      <!-- predictor -->
+      <rect class="box" x="308" y="62" width="224" height="52" rx="8"/>
+      <text class="m" x="320" y="84">editions</text><text class="s" x="520" y="84" text-anchor="end">1 row</text>
+      <text class="s" x="320" y="102">"Premier Division 2026/27"</text>
+      <rect class="box" x="308" y="138" width="224" height="52" rx="8"/>
+      <text class="m" x="320" y="160">rounds</text><text class="s" x="520" y="160" text-anchor="end">1 row</text>
+      <text class="s" x="320" y="178">Round 10 · deadline · open</text>
+      <rect class="box" x="308" y="214" width="224" height="52" rx="8"/>
+      <text class="m" x="320" y="236">round_matches</text><text class="s" x="520" y="236" text-anchor="end">6 rows</text>
+      <text class="s" x="320" y="254">"round 10 uses these six"</text>
+      <rect class="box" x="308" y="310" width="224" height="60" rx="8"/>
+      <text class="m" x="320" y="332">picks</text><text class="s" x="520" y="332" text-anchor="end">0 rows</text>
+      <text class="s" x="320" y="352">player, round, match, home, away</text>
+      <rect class="box" x="308" y="410" width="224" height="52" rx="8"/>
+      <text class="m" x="320" y="432">players</text><text class="s" x="520" y="432" text-anchor="end">0 rows</text>
+      <text class="s" x="320" y="450">public / admin / model</text>
+      <line class="edge" x1="420" y1="138" x2="420" y2="116" marker-end="url(#a2)"/>
+      <line class="edge" x1="420" y1="214" x2="420" y2="192" marker-end="url(#a2)"/>
+      <line class="edge" x1="420" y1="310" x2="420" y2="268" marker-end="url(#a2)"/>
+      <line class="edge" x1="420" y1="370" x2="420" y2="408" marker-end="url(#a2)"/>
+      <polyline class="edge-acc" points="308,240 266,240 266,281 224,281" marker-end="url(#a2)" style="color:var(--accent)"/>
+      <text class="lab" x="266" y="232" text-anchor="middle">uses</text>
+      <text class="s" x="440" y="296">must be in the round</text>
+
+      <!-- public -->
+      <rect class="box" x="618" y="300" width="164" height="52" rx="8"/>
+      <text class="m" x="630" y="322">user_roles</text><text class="s" x="770" y="322" text-anchor="end">0</text>
+      <text class="s" x="630" y="340">site_admin</text>
+      <rect class="box" x="618" y="392" width="164" height="70" rx="8"/>
+      <text class="m" x="630" y="414">profiles</text><text class="s" x="770" y="414" text-anchor="end">0</text>
+      <text class="s" x="630" y="433">handle, display name</text>
+      <text class="s" x="630" y="450">favourite team, confirmed</text>
+      <line class="edge" x1="700" y1="352" x2="700" y2="390" marker-end="url(#a2)"/>
+      <line class="edge" x1="532" y1="436" x2="616" y2="436" marker-end="url(#a2)"/>
+
+      <!-- auth -->
+      <rect class="box" x="842" y="392" width="111" height="70" rx="8"/>
+      <text class="m" x="854" y="416">users</text>
+      <text class="s" x="854" y="436">email, sign-in</text>
+      <text class="s" x="854" y="452">anonymous?</text>
+      <line class="edge" x1="782" y1="427" x2="840" y2="427" marker-end="url(#a2)"/>
+
+      <!-- favourite team, routed under everything -->
+      <polyline class="edge dash" points="700,462 700,512 10,512 10,182 36,182" marker-end="url(#a2)"/>
+      <text class="labm" x="356" y="506" text-anchor="middle">profiles.favourite_team (optional) → ref.teams</text>
+    </svg>
+    <figcaption>Row counts are live as of 18 Nov. Only the hockey facts and round 10 exist so far; every table people fill is still empty, because there is no pick screen yet. Points and leaderboards are views worked out from these tables on every request, so they are never stored and a corrected score re-scores everything.</figcaption>
+  </figure>
+</section>
+
+<!-- 3. EVERY TABLE -->
+<section>
+  <span class="eyebrow">3 · What each table holds</span>
+  <h2>Who writes it, who reads it</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Table</th><th>One row is</th><th>Written by</th><th>Read by</th><th class="num">Rows</th></tr></thead>
+      <tbody>
+        <tr class="group"><td colspan="5">ref · shared hockey facts</td></tr>
+        <tr><td><code>clubs</code></td><td>a club: name, short name ("H&amp;W"), badge file, colours</td><td>publish_round.py</td><td>everyone</td><td class="num">18</td></tr>
+        <tr><td><code>teams</code></td><td>one side of a club, Men's/Open or Women's</td><td>publish_round.py</td><td>everyone</td><td class="num">24</td></tr>
+        <tr><td><code>matches</code></td><td>a fixture: teams, kick-off, score, status. Same id as in hockey_stats</td><td>publish_round.py (fixture), publish_results.py (score)</td><td>everyone</td><td class="num">6</td></tr>
+        <tr class="group"><td colspan="5">predictor · the game</td></tr>
+        <tr><td><code>editions</code></td><td>one run of the FHA Predictor, e.g. prem-2026-27</td><td>publish_round.py</td><td>everyone</td><td class="num">1</td></tr>
+        <tr><td><code>rounds</code></td><td>a round: number, label, deadline, open / locked / scored</td><td>publish_round.py</td><td>everyone</td><td class="num">1</td></tr>
+        <tr><td><code>round_matches</code></td><td>"this match is in this round"</td><td>publish_round.py</td><td>everyone</td><td class="num">6</td></tr>
+        <tr><td><code>players</code></td><td>someone who joined the game: public, admin or the FHA Model</td><td>the player (joins themself), the scripts (admin, model)</td><td>everyone</td><td class="num">0</td></tr>
+        <tr><td><code>picks</code></td><td>one predicted score for one match</td><td>the player, before the deadline</td><td>the player; everyone after the deadline</td><td class="num">0</td></tr>
+        <tr class="group"><td colspan="5">public · people, across the whole site</td></tr>
+        <tr><td><code>profiles</code></td><td>a person: handle, display name, favourite team, when email was confirmed</td><td>made automatically at sign-in; the person edits their name</td><td>everyone (no emails in it)</td><td class="num">0</td></tr>
+        <tr><td><code>user_roles</code></td><td>a site-wide role, e.g. site_admin</td><td>scripts only</td><td>the person themself</td><td class="num">0</td></tr>
+        <tr class="group"><td colspan="5">auth · Supabase's own</td></tr>
+        <tr><td><code>users</code></td><td>a sign-in: email, anonymous or not</td><td>Supabase, when someone signs in</td><td>Supabase only</td><td class="num">0</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 4. ACCESS -->
+<section>
+  <span class="eyebrow">4 · Who can do what</span>
+  <h2>Four ways in</h2>
+  <p>Every request passes three gates inside the database, whichever app sends it. The keys only decide which gate rules apply.</p>
+  <figure>
+    <svg viewBox="0 0 980 170" role="img" aria-label="A request passes grants, then row-level security, then constraints, before it is saved. The secret key skips row-level security but never the constraints.">
+      <defs>
+        <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+      </defs>
+      <rect class="box" x="10" y="30" width="150" height="70" rx="8"/>
+      <text class="t" x="85" y="60" text-anchor="middle">Request</text>
+      <text class="s" x="85" y="80" text-anchor="middle">key + sign-in token</text>
+      <rect class="box" x="210" y="30" width="200" height="70" rx="8"/>
+      <text class="t" x="310" y="56" text-anchor="middle">1 · Grants</text>
+      <text class="s" x="310" y="76" text-anchor="middle">this table, this action, at all?</text>
+      <text class="s" x="310" y="92" text-anchor="middle">"permission denied"</text>
+      <rect class="box" x="460" y="30" width="220" height="70" rx="8"/>
+      <text class="t" x="570" y="56" text-anchor="middle">2 · Row-level security</text>
+      <text class="s" x="570" y="76" text-anchor="middle">your rows? before the deadline?</text>
+      <text class="s" x="570" y="92" text-anchor="middle">"violates row-level security"</text>
+      <rect class="box" x="730" y="30" width="150" height="70" rx="8"/>
+      <text class="t" x="805" y="56" text-anchor="middle">3 · Constraints</text>
+      <text class="s" x="805" y="76" text-anchor="middle">score 0 to 15?</text>
+      <text class="s" x="805" y="92" text-anchor="middle">match in the round?</text>
+      <text class="t" x="935" y="70" text-anchor="middle">Saved</text>
+      <line class="edge" x1="160" y1="65" x2="208" y2="65" marker-end="url(#a3)"/>
+      <line class="edge" x1="410" y1="65" x2="458" y2="65" marker-end="url(#a3)"/>
+      <line class="edge" x1="680" y1="65" x2="728" y2="65" marker-end="url(#a3)"/>
+      <line class="edge" x1="880" y1="65" x2="908" y2="65" marker-end="url(#a3)"/>
+      <path class="edge-acc" d="M310,100 C330,150 640,150 690,110" marker-end="url(#a3)" style="color:var(--accent)"/>
+      <text class="lab" x="500" y="158" text-anchor="middle">secret key: passes 1, skips 2, never skips 3</text>
+    </svg>
+    <figcaption>The rules live in the two migration files in <code>predictor/supabase/migrations/</code> and were installed by <code>supabase db push</code>. Only a new migration changes them.</figcaption>
+  </figure>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Can they…</th><th>Visitor, not signed in<br><span class="s">publishable key</span></th><th>Player, signed in<br><span class="s">publishable key + token</span></th><th>Your scripts<br><span class="s">secret key</span></th><th>You via the CLI<br><span class="s">DB password</span></th></tr></thead>
+      <tbody>
+        <tr><td>Read clubs, teams, matches, rounds</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Open the round JSON file</td><td class="yes">Yes, it's public</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>See their own picks</td><td class="no">No picks</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>See other people's picks</td><td class="part">After the deadline</td><td class="part">After the deadline</td><td class="yes">Always</td><td class="yes">Always</td></tr>
+        <tr><td>Save or change picks</td><td class="no">No</td><td class="part">Own, before the deadline</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>See leaderboards</td><td class="part">Rounds past the deadline</td><td class="part">Rounds past the deadline</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Edit a display name</td><td class="no">No</td><td class="part">Their own</td><td class="yes">Any</td><td class="yes">Any</td></tr>
+        <tr><td>Write results, rounds, matches</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Change the rules or tables</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes, by migration</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><span class="eyebrow">Publishable key · sb_publishable_…</span><p>Sits in the website's code, so anyone can copy it. It names the project and asks for public-level access. It proves nothing about who is asking; the sign-in token does that, and the rules decide.</p></div>
+    <div class="card"><span class="eyebrow">Secret key · sb_secret_…</span><p>Skips row-level security. Lives only in <code>.env</code>, later also as a GitHub secret. Your scripts read it from <code>.env</code>; anyone holding it controls the game.</p></div>
+    <div class="card"><span class="eyebrow">Database password</span><p>Connects straight to Postgres, past the API. The CLI uses it for <code>supabase db push</code>. Owner access: as powerful as the secret key, and more, since it can change tables.</p></div>
+    <div class="card"><span class="eyebrow">Your CLI login</span><p>Not in <code>.env</code>. Tied to your Supabase account rather than this project; it lets the CLI list the keys and link the project.</p></div>
+  </div>
+</section>
+
+<!-- 5. THE WEEK -->
+<section>
+  <span class="eyebrow">5 · The scripts, through one week</span>
+  <h2>Round 10, start to finish</h2>
+  <figure>
+    <svg viewBox="0 0 980 190" role="img" aria-label="Round 10's week: round opens Wednesday 18 November, the Call runs Thursday, the deadline is Saturday 14:00 UK at the first kick-off, matches run until about 19:30, and Monday's verdict writes the scores and opens round 11.">
+      <line x1="40" y1="90" x2="940" y2="90" stroke="currentColor" stroke-width="2"/>
+      <!-- markers -->
+      <circle cx="80" cy="90" r="9" fill="var(--accent)"/>
+      <text class="t" x="80" y="60" text-anchor="middle">Wed 18</text>
+      <text class="s" x="80" y="122" text-anchor="middle">round 10 opened</text>
+      <text class="s" x="80" y="138" text-anchor="middle">publish_round.py</text>
+
+      <circle cx="290" cy="90" r="7" fill="var(--card)" stroke="currentColor" stroke-width="2"/>
+      <text class="t" x="290" y="60" text-anchor="middle">Thu 19</text>
+      <text class="s" x="290" y="122" text-anchor="middle">weekly.sh call</text>
+      <text class="s" x="290" y="138" text-anchor="middle">FHA Model predictions, graphics</text>
+
+      <rect x="520" y="78" width="240" height="24" rx="4" fill="var(--accent-soft)" stroke="var(--accent)"/>
+      <text class="lab" x="640" y="95" text-anchor="middle">matches 14:00 to ~19:30 UK</text>
+      <line x1="520" y1="40" x2="520" y2="150" stroke="var(--no)" stroke-width="2"/>
+      <text class="t" x="520" y="30" text-anchor="middle" style="fill:var(--no)">Sat 21 · 14:00 UK deadline</text>
+      <text class="s" x="520" y="168" text-anchor="middle">picks lock, everyone's picks become visible</text>
+
+      <circle cx="890" cy="90" r="9" fill="var(--card)" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
+      <text class="t" x="890" y="60" text-anchor="middle">Mon 23</text>
+      <text class="s" x="890" y="122" text-anchor="middle">weekly.sh verdict</text>
+      <text class="s" x="890" y="138" text-anchor="middle">scores in, round 11 opens</text>
+    </svg>
+    <figcaption>The deadline is 1am Sunday in Melbourne. Round 10 is a pilot on Phase 1, so its six were chosen by hand; from Phase 2 the six follow a rule (Top 6 week, then Lower 6 week).</figcaption>
+  </figure>
+
+  <div class="steps">
+    <div class="step">
+      <div class="when">Every week<small>weekly.sh, either mode</small></div>
+      <div>
+        <h3>ingest <span class="pill built">Built</span></h3>
+        <p>Pulls new fixtures and results from England Hockey into <code>hockey_stats</code> on your Mac. Nothing online changes yet.</p>
+        <div class="writes"><span class="chip"><b>MySQL</b>matches, events, teams</span></div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="when">Round opens<small>after the verdict; by hand for now</small></div>
+      <div>
+        <h3>publish_round.py <span class="pill built">Built</span></h3>
+        <p>Takes the round's match ids, copies their clubs, teams and fixtures into Supabase, links them to the round with the first kick-off as the deadline, then writes the pick-screen file from the same matches. Safe to re-run.</p>
+        <div class="writes"><span class="chip"><b>upsert</b>ref.clubs</span><span class="chip"><b>upsert</b>ref.teams</span><span class="chip"><b>upsert</b>ref.matches</span><span class="chip"><b>once</b>predictor.editions</span><span class="chip"><b>upsert</b>predictor.rounds</span><span class="chip"><b>link</b>predictor.round_matches</span><span class="chip"><b>file</b>round-N.json</span></div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="when">Same run<small>called by publish_round.py</small></div>
+      <div>
+        <h3>round_json.py <span class="pill built">Built</span></h3>
+        <p>For each match: both teams with badge and colours, kick-off in universal time, each team's last three results and how they last met. Public read-only data, so it is a file, not a table.</p>
+        <pre>{ "match_id": 7133, "gender": "W", "kickoff": "2026-11-21T14:00:00Z",
+  "home": { "name": "Durham Uni", "form": [ ... ] },
+  "away": { "name": "Teddington", "form": [ ... ] },
+  "last_meeting": null }</pre>
+        <div class="writes"><span class="chip"><b>file</b>web/public/data/predictor/round-N.json</span><span class="chip"><b>then</b>git push → website</span></div>
+      </div>
+    </div>
+    <div class="step is-planned">
+      <div class="when">Before the deadline<small>FHA Model's own account</small></div>
+      <div>
+        <h3>FHA Model picks <span class="pill planned">Planned</span></h3>
+        <p>The FHA Model plays like anyone else: its likeliest result, then its likeliest score for that result. Needs its own sign-in account and support for Phase 2 fixtures.</p>
+        <div class="writes"><span class="chip"><b>once</b>predictor.players (model)</span><span class="chip"><b>insert</b>predictor.picks</span></div>
+      </div>
+    </div>
+    <div class="step is-planned">
+      <div class="when">Before the deadline<small>the website</small></div>
+      <div>
+        <h3>The pick screen <span class="pill planned">Planned</span></h3>
+        <p>A visitor gets an anonymous sign-in, joins, and saves six scores. The database stamps the time and refuses anything after the deadline.</p>
+        <div class="writes"><span class="chip"><b>auto</b>auth.users</span><span class="chip"><b>auto</b>public.profiles</span><span class="chip"><b>insert</b>predictor.players</span><span class="chip"><b>insert</b>predictor.picks</span></div>
+      </div>
+    </div>
+    <div class="step is-planned">
+      <div class="when">Monday<small>weekly.sh verdict</small></div>
+      <div>
+        <h3>publish_results.py <span class="pill planned">Planned</span></h3>
+        <p>Writes the six scores and statuses, marks the round scored. The points and leaderboards update by themselves. Then the next round opens.</p>
+        <div class="writes"><span class="chip"><b>update</b>ref.matches (score, status)</span><span class="chip"><b>update</b>predictor.rounds (scored)</span></div>
+      </div>
+    </div>
+    <div class="step is-planned">
+      <div class="when">Before March<small>GitHub Actions, free</small></div>
+      <div>
+        <h3>Scheduled weekly run <span class="pill planned">Planned</span></h3>
+        <p>The same steps on GitHub's machines instead of your Mac: restore the seed, ingest, publish, commit the files back. A scheduled job driven by the fixtures may also freeze results later.</p>
+        <div class="writes"><span class="chip"><b>secret</b>EH_API_KEY</span><span class="chip"><b>secret</b>Supabase secret key</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. NEVER -->
+<section>
+  <span class="eyebrow">6 · Boundaries</span>
+  <h2>What never happens</h2>
+  <div class="grid2">
+    <div class="card"><h3>Nothing writes to hockey_stats</h3><p>Supabase and the website only ever receive copies. The master stays on your Mac, or in the seed file in git.</p></div>
+    <div class="card"><h3>Nothing private in the JSON</h3><p>Anyone can open <code>/data/predictor/round-10.json</code>. Picks, emails and accounts stay in Supabase behind the rules.</p></div>
+    <div class="card"><h3>Features never point at each other</h3><p><code>predictor</code> may point at <code>ref</code> and <code>public</code>. A future <code>blog</code> or <code>stats</code> schema would too, never at <code>predictor</code>.</p></div>
+    <div class="card"><h3>The secret key never leaves .env</h3><p>Not in the website, not in git. The publishable key is the only one the public ever sees.</p></div>
+  </div>
+</section>
+
+</main>
+</body>
+</html>

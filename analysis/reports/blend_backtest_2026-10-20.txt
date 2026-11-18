@@ -1,0 +1,58 @@
+
+=== Men's/Open Premier Division: 118 games in 2024/25 (choose weight), 118 in 2025/26 (test) ===
+Weight on Elo   2024/25 log-loss   2025/26 log-loss  acc
+   0.0            0.703              0.760         65.3%
+   0.1            0.692              0.757         64.4%
+   0.2            0.683              0.754         65.3%
+   0.3            0.675              0.752         66.1%
+   0.4            0.667              0.751         67.8%
+   0.5            0.661              0.750         66.9%
+   0.6            0.656              0.751         66.1%
+   0.7            0.651              0.752         66.9%
+   0.8            0.647              0.753         67.8%
+   0.9            0.644              0.756         67.8%
+   1.0            0.642              0.761         67.8%
+
+2025/26 test (weight chosen on 2024/25: 1.0 on Elo):
+   Score model alone      accuracy 65.3%   log-loss 0.760   Brier 0.439
+   Rankings (Elo) alone   accuracy 67.8%   log-loss 0.761   Brier 0.440
+   50/50 blend            accuracy 66.9%   log-loss 0.750   Brier 0.434
+   Blend at 1.0           accuracy 67.8%   log-loss 0.761   Brier 0.440
+
+   Models backed different teams in 16 of 118 games; score model right 5, rankings right 8, blend right 8
+   Blend by confidence of its pick:
+     0%-55%:  35 games, pick right 49%, average stated chance 49%
+     55%-70%:  20 games, pick right 50%, average stated chance 60%
+     70%-85%:  15 games, pick right 60%, average stated chance 79%
+     85%-100%:  48 games, pick right 92%, average stated chance 93%
+   Exact scores: score model's likeliest 10/118, combined call's score (likeliest where the pick wins) 8/118
+
+=== Women's Premier Division: 118 games in 2024/25 (choose weight), 118 in 2025/26 (test) ===
+Weight on Elo   2024/25 log-loss   2025/26 log-loss  acc
+   0.0            0.809              0.823         66.1%
+   0.1            0.808              0.822         66.1%
+   0.2            0.807              0.822         66.1%
+   0.3            0.807              0.821         64.4%
+   0.4            0.806              0.821         64.4%
+   0.5            0.807              0.821         64.4%
+   0.6            0.807              0.822         65.3%
+   0.7            0.808              0.823         66.1%
+   0.8            0.810              0.824         65.3%
+   0.9            0.811              0.826         65.3%
+   1.0            0.813              0.828         64.4%
+
+2025/26 test (weight chosen on 2024/25: 0.4 on Elo):
+   Score model alone      accuracy 66.1%   log-loss 0.823   Brier 0.478
+   Rankings (Elo) alone   accuracy 64.4%   log-loss 0.828   Brier 0.480
+   50/50 blend            accuracy 64.4%   log-loss 0.821   Brier 0.476
+   Blend at 0.4           accuracy 64.4%   log-loss 0.821   Brier 0.476
+
+   Models backed different teams in 11 of 118 games; score model right 6, rankings right 4, blend right 4
+   Blend by confidence of its pick:
+     0%-55%:  43 games, pick right 49%, average stated chance 46%
+     55%-70%:  39 games, pick right 59%, average stated chance 62%
+     70%-85%:  27 games, pick right 89%, average stated chance 77%
+     85%-100%:   9 games, pick right 89%, average stated chance 90%
+   Exact scores: score model's likeliest 8/118, combined call's score (likeliest where the pick wins) 8/118
+
+Log-loss: lower is better (flat 1-in-3 guess 1.099). Brier: lower is better (flat 0.667).

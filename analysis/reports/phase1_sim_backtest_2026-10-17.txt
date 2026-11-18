@@ -1,0 +1,50 @@
+Men's/Open Premier Division: Phase 1 simulator backtest, 5000 sims per checkpoint
+
+Tiebreak check (points, GD, goals scored) v the real Top 6:
+  2022/23: matches
+  2023/24: matches
+  2024/25: matches
+  2025/26: matches
+
+P(Top 6) scored against what happened (Brier: 0 perfect, lower is better).
+'table now' = whoever is in the top six at that point is in, nobody else.
+  after round  0: simulator 0.069   table now 0.250   (n=48)
+  after round  3: simulator 0.048   table now 0.125   (n=48)
+  after round  6: simulator 0.041   table now 0.083   (n=48)
+  after round  9: simulator 0.017   table now 0.042   (n=48)
+
+Calibration, all checkpoints pooled (does 80% happen 80% of the time?):
+              n  said  happened
+bin                            
+[0.0, 0.05)  45  0.01      0.00
+[0.05, 0.2)  34  0.10      0.06
+[0.2, 0.4)   24  0.32      0.29
+[0.4, 0.6)    4  0.47      0.50
+[0.6, 0.8)    3  0.66      1.00
+[0.8, 0.95)  11  0.88      1.00
+[0.95, 1.0)  71  1.00      1.00
+Women's Premier Division: Phase 1 simulator backtest, 5000 sims per checkpoint
+
+Tiebreak check (points, GD, goals scored) v the real Top 6:
+  2022/23: matches
+  2023/24: matches
+  2024/25: matches
+  2025/26: matches
+
+P(Top 6) scored against what happened (Brier: 0 perfect, lower is better).
+'table now' = whoever is in the top six at that point is in, nobody else.
+  after round  0: simulator 0.137   table now 0.250   (n=48)
+  after round  3: simulator 0.129   table now 0.250   (n=48)
+  after round  6: simulator 0.096   table now 0.167   (n=48)
+  after round  9: simulator 0.020   table now 0.000   (n=48)
+
+Calibration, all checkpoints pooled (does 80% happen 80% of the time?):
+              n  said  happened
+bin                            
+[0.0, 0.05)  41  0.01      0.02
+[0.05, 0.2)  23  0.11      0.17
+[0.2, 0.4)   27  0.27      0.22
+[0.4, 0.6)   15  0.50      0.40
+[0.6, 0.8)   17  0.72      0.76
+[0.8, 0.95)  23  0.88      0.87
+[0.95, 1.0)  46  0.99      1.00

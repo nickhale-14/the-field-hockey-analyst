@@ -1,0 +1,36 @@
+
+=== Men's/Open ===
+season     games |  correct: Elo  Poisson  Blend |  log-loss: Elo  Poisson   Blend |  Brier: Elo  Poisson   Blend
+2023/24      118 |            89       92     91 |          0.624    0.652   0.622 |       0.342    0.363   0.343  (unmatched Elo rows 0)
+2024/25      118 |            88       86     89 |          0.643    0.703   0.656 |       0.362    0.399   0.369  (unmatched Elo rows 0)
+2025/26      118 |            81       77     79 |          0.761    0.760   0.743 |       0.439    0.439   0.432  (unmatched Elo rows 0)
+2026/27       41 |            32       31     32 |          0.671    0.704   0.679 |       0.363    0.386   0.370  (unmatched Elo rows 0)
+ALL          395 |           290      286    291 |          0.675    0.705   0.674 |       0.379    0.399   0.380
+accuracy: Elo 73.4%  Poisson 72.4%  Blend 73.7%
+log-loss Elo - Poisson    -0.029  (95% -0.064 to +0.008)
+log-loss Elo - Blend      +0.001  (95% -0.019 to +0.023)
+log-loss Poisson - Blend  +0.031  (95% +0.015 to +0.046)
+models backed different sides in 43 of 395: Elo right 19, Poisson right 15
+said v happened (draws): Elo 44, Poisson 50, Blend 47, actual 55
+calibration of the top pick (stated chance -> right):
+  Elo     0%+: n=96 said 47% right 52% | 55%+: n=60 said 62% right 52% | 70%+: n=65 said 77% right 75% | 85%+: n=174 said 95% right 92%
+  Poisson 0%+: n=123 said 48% right 52% | 55%+: n=85 said 62% right 71% | 70%+: n=80 said 77% right 76% | 85%+: n=107 said 93% right 94%
+  Blend   0%+: n=110 said 48% right 54% | 55%+: n=69 said 62% right 67% | 70%+: n=90 said 78% right 74% | 85%+: n=126 said 94% right 94%
+
+=== Women's ===
+season     games |  correct: Elo  Poisson  Blend |  log-loss: Elo  Poisson   Blend |  Brier: Elo  Poisson   Blend
+2023/24      118 |            71       69     67 |          0.889    0.881   0.880 |       0.521    0.514   0.513  (unmatched Elo rows 0)
+2024/25      118 |            78       78     78 |          0.801    0.809   0.800 |       0.458    0.465   0.458  (unmatched Elo rows 0)
+2025/26      118 |            75       78     78 |          0.833    0.823   0.822 |       0.482    0.478   0.477  (unmatched Elo rows 0)
+2026/27       42 |            27       32     29 |          0.774    0.731   0.742 |       0.450    0.420   0.428  (unmatched Elo rows 0)
+ALL          396 |           251      257    252 |          0.834    0.827   0.824 |       0.483    0.479   0.477
+accuracy: Elo 63.4%  Poisson 64.9%  Blend 63.6%
+log-loss Elo - Poisson    +0.008  (95% -0.014 to +0.029)
+log-loss Elo - Blend      +0.010  (95% -0.001 to +0.021)
+log-loss Poisson - Blend  +0.002  (95% -0.008 to +0.013)
+models backed different sides in 44 of 396: Elo right 14, Poisson right 20
+said v happened (draws): Elo 79, Poisson 73, Blend 76, actual 68
+calibration of the top pick (stated chance -> right):
+  Elo     0%+: n=155 said 45% right 43% | 55%+: n=114 said 63% right 69% | 70%+: n=86 said 77% right 79% | 85%+: n=41 said 89% right 93%
+  Poisson 0%+: n=166 said 46% right 51% | 55%+: n=112 said 61% right 62% | 70%+: n=80 said 77% right 82% | 85%+: n=38 said 91% right 95%
+  Blend   0%+: n=163 said 46% right 45% | 55%+: n=119 said 63% right 66% | 70%+: n=81 said 78% right 86% | 85%+: n=33 said 90% right 91%

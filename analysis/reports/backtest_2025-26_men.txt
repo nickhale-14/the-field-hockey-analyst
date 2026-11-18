@@ -1,0 +1,105 @@
+Men: 2852 played matches, seasons ['2019/20', '2020/21', '2021/22', '2022/23', '2023/24', '2024/25', '2025/26']
+
+Tuning on 2024/25 (static fit at season start):
+  half-life=1.0   shrink=0.3   season-discount=0.25  log-loss=0.9473
+  half-life=1.0   shrink=0.3   season-discount=0.5   log-loss=0.9465
+  half-life=1.0   shrink=0.3   season-discount=0.75  log-loss=0.9429
+  half-life=1.0   shrink=0.3   season-discount=1.0   log-loss=0.9392
+  half-life=1.0   shrink=1.0   season-discount=0.25  log-loss=0.9402
+  half-life=1.0   shrink=1.0   season-discount=0.5   log-loss=0.9413
+  half-life=1.0   shrink=1.0   season-discount=0.75  log-loss=0.9415
+  half-life=1.0   shrink=1.0   season-discount=1.0   log-loss=0.9402
+  half-life=1.0   shrink=3.0   season-discount=0.25  log-loss=0.9415
+  half-life=1.0   shrink=3.0   season-discount=0.5   log-loss=0.9367
+  half-life=1.0   shrink=3.0   season-discount=0.75  log-loss=0.9366
+  half-life=1.0   shrink=3.0   season-discount=1.0   log-loss=0.9371
+  half-life=4.0   shrink=0.3   season-discount=0.25  log-loss=0.9472
+  half-life=4.0   shrink=0.3   season-discount=0.5   log-loss=0.9419
+  half-life=4.0   shrink=0.3   season-discount=0.75  log-loss=0.9364
+  half-life=4.0   shrink=0.3   season-discount=1.0   log-loss=0.9329
+  half-life=4.0   shrink=1.0   season-discount=0.25  log-loss=0.9407
+  half-life=4.0   shrink=1.0   season-discount=0.5   log-loss=0.9410
+  half-life=4.0   shrink=1.0   season-discount=0.75  log-loss=0.9386
+  half-life=4.0   shrink=1.0   season-discount=1.0   log-loss=0.9359
+  half-life=4.0   shrink=3.0   season-discount=0.25  log-loss=0.9380
+  half-life=4.0   shrink=3.0   season-discount=0.5   log-loss=0.9366
+  half-life=4.0   shrink=3.0   season-discount=0.75  log-loss=0.9370
+  half-life=4.0   shrink=3.0   season-discount=1.0   log-loss=0.9368
+  half-life=50.0  shrink=0.3   season-discount=0.25  log-loss=0.9467
+  half-life=50.0  shrink=0.3   season-discount=0.5   log-loss=0.9400
+  half-life=50.0  shrink=0.3   season-discount=0.75  log-loss=0.9344
+  half-life=50.0  shrink=0.3   season-discount=1.0   log-loss=0.9316
+  half-life=50.0  shrink=1.0   season-discount=0.25  log-loss=0.9409
+  half-life=50.0  shrink=1.0   season-discount=0.5   log-loss=0.9405
+  half-life=50.0  shrink=1.0   season-discount=0.75  log-loss=0.9372
+  half-life=50.0  shrink=1.0   season-discount=1.0   log-loss=0.9346
+  half-life=50.0  shrink=3.0   season-discount=0.25  log-loss=0.9374
+  half-life=50.0  shrink=3.0   season-discount=0.5   log-loss=0.9367
+  half-life=50.0  shrink=3.0   season-discount=0.75  log-loss=0.9370
+  half-life=50.0  shrink=3.0   season-discount=1.0   log-loss=0.9367
+  -> chosen half-life=50.0 shrink=0.3 season-discount=1.0
+
+=== 2025/26 backtest (Men, half-life 50.0y, shrink 0.3, season discount 1.0) ===
+Fitted home advantage at season start: x1.146 on scoring rate (~+0.31 goals at a neutral-strength matchup)
+Tier means (attack / defence): Premier: +0.86/+0.83, Division 1: +0.22/+0.19, Conference: -0.29/-0.26
+First season after a move (attack / defence offsets, log scale): promoted: +0.07/-0.08, relegated: -0.04/-0.10
+Goal coupling (bivariate Poisson, share of min(xG) common to both sides): start 0.000, end 0.000
+
+-- static (fit once, season start) --
+  n                        658
+  accuracy                 0.517
+  log_loss                 1.012
+  brier                    0.606
+  exact_score              0.073
+  goal_mae                 1.306
+  margin_bias              -0.054
+  pred_goals_per_match     4.883
+  actual_goals_per_match   5.032
+  home_pick_rate           0.625
+  draw_pick_rate           0.000
+  pred_draw_rate           0.162
+  actual_draw_rate         0.199
+
+-- rolling (refit weekly) --
+  n                        658
+  accuracy                 0.573
+  log_loss                 0.943
+  brier                    0.558
+  exact_score              0.065
+  goal_mae                 1.248
+  margin_bias              -0.042
+  pred_goals_per_match     4.930
+  actual_goals_per_match   5.032
+  home_pick_rate           0.602
+  draw_pick_rate           0.000
+  pred_draw_rate           0.161
+  actual_draw_rate         0.199
+
+-- baselines --
+  always_home_accuracy       0.447
+  base_rate_log_loss         1.057
+  base_rate_brier            0.639
+  last_season_gd_accuracy    0.491
+
+-- rolling model by tier --
+  Premier      n=118   acc=0.661 log-loss=0.776 goal-MAE=1.30 exact=0.093
+  Division 1   n=180   acc=0.550 log-loss=0.964 goal-MAE=1.22 exact=0.039
+  Conference   n=360   acc=0.556 log-loss=0.988 goal-MAE=1.24 exact=0.069
+
+-- calibration of the favourite (rolling) --
+              n  predicted    actual
+bin                                 
+(0.3, 0.4]    4   0.394011  0.250000
+(0.4, 0.5]  203   0.452593  0.472906
+(0.5, 0.6]  182   0.552314  0.510989
+(0.6, 0.7]  115   0.644651  0.565217
+(0.7, 0.8]   88   0.747455  0.750000
+(0.8, 0.9]   39   0.846020  0.794872
+(0.9, 1.0]   27   0.943231  0.925926
+
+-- teams that changed tier into the test season (rolling) --
+    group  teams  matches  accuracy  log_loss  margin_bias_for_moved_team
+ promoted      6      103  0.524272  1.000665                    0.232280
+relegated      6      106  0.566038  0.967887                   -0.692144
+
+Per-match predictions written to output/predictions_M_2025-26.csv

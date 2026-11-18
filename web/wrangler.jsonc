@@ -1,0 +1,11 @@
+{
+  // Static site for thefieldhockeyanalyst.com (Workers static assets; free, no traffic cap).
+  // Deploy: cd web && npx wrangler deploy
+  "name": "fha-site",
+  "compatibility_date": "2026-11-01",
+  "assets": { "directory": "./public" },
+  "routes": [
+    { "pattern": "thefieldhockeyanalyst.com", "custom_domain": true },
+    { "pattern": "www.thefieldhockeyanalyst.com", "custom_domain": true }
+  ]
+}
